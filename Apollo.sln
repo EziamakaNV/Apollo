@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34526.213
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apollo", "Apollo\Apollo.csproj", "{CED8E82F-341F-406E-803A-9401235FECEC}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5B2D2A80-2242-42C2-9ABC-FF429BC2A3EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CED8E82F-341F-406E-803A-9401235FECEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CED8E82F-341F-406E-803A-9401235FECEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CED8E82F-341F-406E-803A-9401235FECEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CED8E82F-341F-406E-803A-9401235FECEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B2D2A80-2242-42C2-9ABC-FF429BC2A3EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B2D2A80-2242-42C2-9ABC-FF429BC2A3EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B2D2A80-2242-42C2-9ABC-FF429BC2A3EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B2D2A80-2242-42C2-9ABC-FF429BC2A3EA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E538685D-18BE-470F-8B88-F2C3D1E1EAC6}
+	EndGlobalSection
+EndGlobal

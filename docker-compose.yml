@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  apollo:
+    image: ${DOCKER_REGISTRY-}apollo
+    build:
+      context: .
+      dockerfile: Apollo/Dockerfile
+    environment:
+      GoogleGeminiSettings__ApiKey: ${GoogleGemini__ApiKey}

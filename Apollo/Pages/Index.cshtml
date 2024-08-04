@@ -1,0 +1,36 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Apollo Chat";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <form method="post" enctype="multipart/form-data">
+        <div>
+            <label for="symptoms">Describe your symptoms:</label>
+            <textarea id="symptoms" name="symptoms" rows="4" cols="50"></textarea>
+        </div>
+        <div>
+            <label for="image">Upload an image (optional):</label>
+            <input type="file" id="image" name="image" />
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+@if (Model.Diagnosis != null)
+{
+    <div>
+        <h3>Diagnosis</h3>
+        <p>@Model.Diagnosis</p>
+        <button type="button" onclick="requestSecondOpinion()">Request Second Opinion</button>
+    </div>
+}
+
+<script>
+    function requestSecondOpinion() {
+        // Implement the functionality to request a second opinion
+    }
+</script>
