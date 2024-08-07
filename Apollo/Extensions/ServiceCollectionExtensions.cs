@@ -23,14 +23,18 @@ namespace Apollo.Extensions
             });
         }
 
-        public static void AddIdentity(this IServiceCollection services, IConfiguration configuration) 
+        public static void AddData(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection") ??
                  throw new InvalidOperationException("Connection string 'ApolloIdentityDbContextConnection' not found.");
 
             services.AddDbContext<ApolloIdentityDbContext>(options => options.UseNpgsql(connectionString));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+        }
+
+        public static void AddIdentity(this IServiceCollection services) 
+        {
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddEntityFrameworkStores<ApolloIdentityDbContext>();
 
         }

@@ -1,10 +1,25 @@
 version: '3.4'
 
 services:
-  apollo:
+  apollo.api:
     image: ${DOCKER_REGISTRY-}apollo
     build:
       context: .
       dockerfile: Apollo/Dockerfile
     environment:
       GoogleGeminiSettings__ApiKey: ${GoogleGemini__ApiKey}
+      ConnectionStrings__DefaultConnection: ${ConnectionStrings__DefaultConnection}
+
+  apollo.db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: ${Database_DB}
+      POSTGRES_USER: ${Database_User}
+      POSTGRES_PASSWORD: ${Database_Password}
+    volumes:
+        - postgresvolume:/var/lib/postgresql/data
+    ports:
+      - "4432:5432"
+
+volumes:
+  postgresvolume:
