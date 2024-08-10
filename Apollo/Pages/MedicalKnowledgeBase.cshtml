@@ -19,13 +19,16 @@
     <div class="card-body">
         <h5 class="card-title">Ask Your Question</h5>
         <p class="card-text">Type your question below and get detailed information:</p>
-        <form method="post">
+        <form id="knowledgeForm" method="post" onsubmit="showLoader()">
             <div class="form-group">
                 <label for="query">You are an expert in medical knowledge. Provide detailed information on the following medical condition or topic:</label>
                 <textarea id="query" name="query" rows="4" class="form-control" placeholder="e.g., How can I reduce my blood pressure?"></textarea>
             </div>
             <button type="submit" class="btn btn-primary mt-3">Submit</button>
         </form>
+        <div id="spinner" class="spinner-border text-primary" role="status" style="display: none;">
+            <span class="visually-hidden">Loading...</span>
+        </div>
     </div>
 </div>
 
@@ -37,4 +40,14 @@
             <p class="card-text">@Model.Response</p>
         </div>
     </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function showLoader() {
+            document.getElementById('knowledgeForm').style.display = 'none';
+            document.getElementById('spinner').style.display = 'block';
+        }
+    </script>
 }

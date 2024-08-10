@@ -8,6 +8,20 @@
 
 <p>You're about to request a second opinion from @Model.Doctor.Name for a price of $@Model.Doctor.Price.</p>
 
-<form method="post">
+<form id="opinionForm" method="post" onsubmit="showLoader()">
     <button type="submit" class="btn btn-success">Confirm and Pay</button>
 </form>
+
+<div id="spinner" class="spinner-border text-primary" role="status" style="display: none;">
+    <span class="visually-hidden">Processing...</span>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function showLoader() {
+            document.getElementById('opinionForm').style.display = 'none';
+            document.getElementById('spinner').style.display = 'block';
+        }
+    </script>
+}
