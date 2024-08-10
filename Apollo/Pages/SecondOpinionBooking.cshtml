@@ -1,0 +1,21 @@
+﻿@page
+@model Apollo.Pages.SecondOpinionBookingModel
+@{
+    ViewData["Title"] = "Book a Second Opinion";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>Choose from our network of top-rated doctors for a second opinion. Prices are based on the doctor's expertise and availability.</p>
+
+<div class="doctor-list">
+    @foreach (var doctor in Model.Doctors)
+    {
+        <div class="doctor-card">
+            <h5>@doctor.Name</h5>
+            <p>Rating: @doctor.Rating/5.0</p>
+            <p>Price: $@doctor.Price</p>
+            <a asp-page="/SecondOpinionConfirmation" asp-route-doctorId="@doctor.Id" class="btn btn-primary">Request Opinion</a>
+        </div>
+    }
+</div>

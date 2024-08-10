@@ -1,36 +1,65 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Apollo Chat";
+    ViewData["Title"] = "Symptom Checker";
 }
 
 <h2>@ViewData["Title"]</h2>
 
-<div>
-    <form method="post" enctype="multipart/form-data">
-        <div>
+<div class="chat-container">
+    <h1 class="chat-title">Symptom Checker</h1>
+    <p class="chat-subtitle">
+        Enter your symptoms below, optionally upload an image, and get feedback on possible diagnoses, remedies, and advice on whether an ER visit is necessary.
+    </p>
+
+    <form method="post" enctype="multipart/form-data" class="chat-form">
+        <div class="chat-input-group">
             <label for="symptoms">Describe your symptoms:</label>
-            <textarea id="symptoms" name="symptoms" rows="4" cols="50"></textarea>
+            <textarea id="symptoms" name="symptoms" rows="4" class="form-control" placeholder="e.g., I've been experiencing a persistent cough..."></textarea>
         </div>
-        <div>
+
+        <div class="chat-input-group">
             <label for="image">Upload an image (optional):</label>
-            <input type="file" id="image" name="image" />
+            <input type="file" id="image" name="image" class="form-control-file" />
         </div>
-        <button type="submit">Submit</button>
+
+        <div class="chat-input-group">
+            <label for="bloodPressure">Blood Pressure (optional):</label>
+            <input type="text" id="bloodPressure" name="bloodPressure" class="form-control" placeholder="e.g., 120/80 mmHg" />
+        </div>
+
+        <div class="chat-input-group">
+            <label for="temperature">Temperature (optional):</label>
+            <input type="text" id="temperature" name="temperature" class="form-control" placeholder="e.g., 98.6°F" />
+        </div>
+
+        <div class="chat-input-group">
+            <label for="weight">Weight (optional):</label>
+            <input type="text" id="weight" name="weight" class="form-control" placeholder="e.g., 150 lbs" />
+        </div>
+
+        <div class="chat-input-group">
+            <label for="height">Height (optional):</label>
+            <input type="text" id="height" name="height" class="form-control" placeholder="e.g., 5'9&quot;" />
+        </div>
+        <div class="chat-info">
+            <a asp-page="/HealthCheckLocations" class="info-link">
+                <i class="fas fa-info-circle"></i> Find free health check locations near you
+            </a>
+        </div>
+
+        <button type="submit" class="btn btn-primary chat-submit">Get Diagnosis</button>
     </form>
-</div>
 
-@if (Model.Diagnosis != null)
-{
-    <div>
-        <h3>Diagnosis</h3>
-        <p>@Model.Diagnosis</p>
-        <button type="button" onclick="requestSecondOpinion()">Request Second Opinion</button>
-    </div>
-}
 
-<script>
-    function requestSecondOpinion() {
-        // Implement the functionality to request a second opinion
+
+    @if (Model.Diagnosis != null)
+    {
+        <div class="chat-response">
+            <h3>Your Diagnosis</h3>
+            <p>@Model.Diagnosis</p>
+
+            <a asp-page="/SecondOpinionBooking" class="btn btn-secondary chat-second-opinion">Request Second Opinion</a>
+        </div>
     }
-</script>
+</div>

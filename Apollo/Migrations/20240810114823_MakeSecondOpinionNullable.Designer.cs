@@ -3,6 +3,7 @@ using System;
 using Apollo.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Apollo.Migrations
 {
     [DbContext(typeof(ApolloIdentityDbContext))]
-    partial class ApolloIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240810114823_MakeSecondOpinionNullable")]
+    partial class MakeSecondOpinionNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

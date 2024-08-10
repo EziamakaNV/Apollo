@@ -21,20 +21,39 @@ namespace Apollo.Pages
         public string Symptoms { get; set; }
 
         [BindProperty]
-        public IFormFile? Image { get; set; }
+        public IFormFile Image { get; set; }
+
+        [BindProperty]
+        public string BloodPressure { get; set; }
+
+        [BindProperty]
+        public string Temperature { get; set; }
+
+        [BindProperty]
+        public string Weight { get; set; }
+
+        [BindProperty]
+        public string Height { get; set; }
 
         public string Diagnosis { get; private set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (ModelState.IsValid)
+            if (string.IsNullOrWhiteSpace(Symptoms))
             {
-                Diagnosis = await _geminiService.GetDiagnosisAsync(Symptoms, Image);
-
-                // Save consultation history
-                var userId = _userManager.GetUserId(User);
-                await _geminiService.SaveConsultationHistoryAsync(userId, Symptoms, Diagnosis);
+                ModelState.AddModelError(string.Empty, "Symptoms cannot be empty.");
+                return Page();
             }
+
+            // Combine all the information into a single query
+            var query = $"Symptoms: {Symptoms}\nBlood Pressure: {BloodPressure}\nTemperature: {Temperature}\nWeight: {Weight}\nHeight: {Height}";
+
+            // Get diagnosis from Gemini API
+            Diagnosis = await _geminiService.GetDiagnosisAsync(query, Image);
+
+            // Save consultation history
+            var userId = _userManager.GetUserId(User);
+            await _geminiService.SaveConsultationHistoryAsync(userId, query, Diagnosis);
 
             return Page();
         }

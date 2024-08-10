@@ -1,0 +1,13 @@
+﻿@page
+@model Apollo.Pages.SecondOpinionConfirmationModel
+@{
+    ViewData["Title"] = "Confirm Second Opinion";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>You're about to request a second opinion from @Model.Doctor.Name for a price of $@Model.Doctor.Price.</p>
+
+<form method="post">
+    <button type="submit" class="btn btn-success">Confirm and Pay</button>
+</form>

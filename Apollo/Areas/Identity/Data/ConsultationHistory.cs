@@ -11,6 +11,9 @@ namespace Apollo.Areas.Identity.Data
         public string Diagnosis { get; set; }
         public DateTimeOffset ConsultationDate { get; set; }
 
+        public string? SecondOpinion { get; set; }
+        public string? DoctorName { get; set; }
+
         // Navigation property
         public ApplicationUser User { get; set; }
     }
