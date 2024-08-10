@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-md-4">
-        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" onsubmit="return validateForm()">
             <h2>Create a new account.</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
@@ -26,6 +26,13 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
                 <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-check">
+                <input asp-for="Input.AcceptTerms" class="form-check-input" type="checkbox" id="AcceptTerms" />
+                <label class="form-check-label" asp-for="Input.AcceptTerms">
+                    I agree to the <a asp-page="/TermsAndConditions" target="_blank">Terms and Conditions</a> and <a asp-page="/Privacy" target="_blank">Privacy Policy</a>.
+                </label>
+                <span asp-validation-for="Input.AcceptTerms" class="text-danger"></span>
             </div>
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
@@ -64,4 +71,14 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        function validateForm() {
+            var termsCheckbox = document.getElementById("AcceptTerms");
+            if (!termsCheckbox.checked) {
+                alert("You must accept the terms and conditions to register.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 }
