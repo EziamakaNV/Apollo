@@ -13,8 +13,10 @@ namespace Apollo.Areas.Identity.Data
 
         public string? SecondOpinion { get; set; }
         public string? DoctorName { get; set; }
+        public bool RequestedSecondOpinion { get; set; } = false;
 
-        // Navigation property
+        // Navigation properties
         public ApplicationUser User { get; set; }
+        public List<ConsultationImage> Images { get; set; } // Related images
     }
 }

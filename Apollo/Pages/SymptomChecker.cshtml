@@ -1,0 +1,110 @@
+﻿@page
+@model Apollo.Pages.SymptomCheckerModel
+@{
+    ViewData["Title"] = "Symptom Checker";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="chat-container">
+    <h1 class="chat-title">Symptom Checker</h1>
+    <p class="chat-subtitle">
+        Enter your symptoms below, optionally upload an image, and get feedback on possible diagnoses, remedies, and advice on whether an ER visit is necessary.
+    </p>
+
+    <form id="symptomForm" method="post" enctype="multipart/form-data" class="chat-form" onsubmit="return compressAndSubmit()">
+        <div class="chat-input-group">
+            <label for="symptoms">Describe your symptoms:</label>
+            <textarea id="symptoms" name="symptoms" rows="4" class="form-control" placeholder="e.g., I've been experiencing a persistent cough..."></textarea>
+        </div>
+
+        <div class="chat-input-group">
+            <label for="image">Upload an image (optional):</label>
+            <input type="file" id="image" name="image" class="form-control-file" accept=".jpg,.jpeg,.png,.gif,.bmp" />
+        </div>
+
+        <div class="chat-input-group">
+            <label for="bloodPressure">Blood Pressure (optional):</label>
+            <input type="text" id="bloodPressure" name="bloodPressure" class="form-control" placeholder="e.g., 120/80 mmHg" />
+        </div>
+
+        <div class="chat-input-group">
+            <label for="temperature">Temperature (optional):</label>
+            <input type="text" id="temperature" name="temperature" class="form-control" placeholder="e.g., 98.6°F" />
+        </div>
+
+        <div class="chat-input-group">
+            <label for="weight">Weight (optional):</label>
+            <input type="text" id="weight" name="weight" class="form-control" placeholder="e.g., 150 lbs" />
+        </div>
+
+        <div class="chat-input-group">
+            <label for="height">Height (optional):</label>
+            <input type="text" id="height" name="height" class="form-control" placeholder="e.g., 5'9&quot;" />
+        </div>
+        <div class="chat-info">
+            <a asp-page="/HealthCheckLocations" class="info-link">
+                <i class="fas fa-info-circle"></i> Find free health check locations near you
+            </a>
+        </div>
+
+        <button type="submit" class="btn btn-primary chat-submit">Get Diagnosis</button>
+    </form>
+
+    <div id="spinner" class="spinner-border text-primary" role="status" style="display: none;">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+
+    @if (Model.Diagnosis != null)
+    {
+        <div class="chat-response">
+            <h3>Your Diagnosis</h3>
+            <p>@Model.Diagnosis</p>
+
+            <a asp-page="/SecondOpinionBooking" class="btn btn-secondary chat-second-opinion">Request Second Opinion</a>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.jsdelivr.net/npm/compressorjs@1.1.1/dist/compressor.min.js"></script>
+    <script>
+        function compressAndSubmit() {
+            const imageInput = document.getElementById('image');
+            const spinner = document.getElementById('spinner');
+            const form = document.getElementById('symptomForm');
+
+            if (imageInput.files && imageInput.files[0]) {
+                console.log("compression starting...")
+                new Compressor(imageInput.files[0], {
+                    quality: 0.6,
+                    maxWidth: 1024,
+                    success(result) {
+
+                        const file = new File([result], result.name, {
+                            type: result.type,
+                            lastModified: Date.now(),
+                        });
+
+                        const dataTransfer = new DataTransfer();
+                        dataTransfer.items.add(file);
+                        imageInput.files = dataTransfer.files;
+
+                        spinner.style.display = 'block';
+                        form.submit();
+                    },
+                    error(err) {
+                        console.error('Image compression error:', err.message);
+                    },
+                });
+
+                return false;
+            } else {
+                // No image provided, just submit the form
+                spinner.style.display = 'block';
+                return true;
+            }
+        }
+    </script>
+}

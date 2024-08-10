@@ -1,65 +1,127 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Symptom Checker";
+    ViewData["Title"] = "Welcome to Your Health Solution";
 }
 
-<h2>@ViewData["Title"]</h2>
+<div class="container mt-5">
+    <!-- Hero Section -->
+    <div class="jumbotron text-center">
+        <h1 class="display-4">Affordable Healthcare at Your Fingertips</h1>
+        <p class="lead">
+            Skip the costly ER visits. Get quick and reliable health assessments, personalized advice, and expert opinions from the comfort of your home.
+        </p>
+        <a class="btn btn-primary btn-lg" asp-area="Identity" asp-page="/Account/Register" role="button">Get Started</a>
+        <a class="btn btn-secondary btn-lg" asp-area="Identity" asp-page="/Account/Login" role="button">Already Registered? Login</a>
+    </div>
 
-<div class="chat-container">
-    <h1 class="chat-title">Symptom Checker</h1>
-    <p class="chat-subtitle">
-        Enter your symptoms below, optionally upload an image, and get feedback on possible diagnoses, remedies, and advice on whether an ER visit is necessary.
-    </p>
-
-    <form method="post" enctype="multipart/form-data" class="chat-form">
-        <div class="chat-input-group">
-            <label for="symptoms">Describe your symptoms:</label>
-            <textarea id="symptoms" name="symptoms" rows="4" class="form-control" placeholder="e.g., I've been experiencing a persistent cough..."></textarea>
+    <!-- How It Works Section -->
+    <div class="row my-5">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">1. Describe Your Symptoms</h5>
+                    <p class="card-text">Enter your symptoms and any additional health information. You can even upload images to provide more context.</p>
+                </div>
+            </div>
         </div>
-
-        <div class="chat-input-group">
-            <label for="image">Upload an image (optional):</label>
-            <input type="file" id="image" name="image" class="form-control-file" />
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">2. Get Immediate Feedback</h5>
+                    <p class="card-text">Receive a preliminary diagnosis, advice on remedies, and recommendations on whether you should visit the ER.</p>
+                </div>
+            </div>
         </div>
-
-        <div class="chat-input-group">
-            <label for="bloodPressure">Blood Pressure (optional):</label>
-            <input type="text" id="bloodPressure" name="bloodPressure" class="form-control" placeholder="e.g., 120/80 mmHg" />
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">3. Request a Second Opinion</h5>
+                    <p class="card-text">If needed, forward your case to a licensed doctor for a detailed second opinion—all without leaving your home.</p>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="chat-input-group">
-            <label for="temperature">Temperature (optional):</label>
-            <input type="text" id="temperature" name="temperature" class="form-control" placeholder="e.g., 98.6°F" />
+    <!-- Benefits Section -->
+    <div class="my-5">
+        <h2 class="text-center">Why Choose Us?</h2>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <h4>Save Money</h4>
+                <p>By using our service, you can avoid unnecessary ER visits and save hundreds of dollars on healthcare costs.</p>
+            </div>
+            <div class="col-md-6">
+                <h4>Convenient and Accessible</h4>
+                <p>Get health advice anytime, anywhere. No need to wait in long lines or take time off work.</p>
+            </div>
+            <div class="col-md-6 mt-3">
+                <h4>Expert Opinions</h4>
+                <p>Have peace of mind knowing that your health is being assessed by qualified professionals.</p>
+            </div>
+            <div class="col-md-6 mt-3">
+                <h4>Confidential and Secure</h4>
+                <p>Your health information is encrypted and protected, ensuring that your privacy is always maintained.</p>
+            </div>
         </div>
+    </div>
 
-        <div class="chat-input-group">
-            <label for="weight">Weight (optional):</label>
-            <input type="text" id="weight" name="weight" class="form-control" placeholder="e.g., 150 lbs" />
+    <!-- FAQs Section -->
+    <div class="accordion my-5" id="faqAccordion">
+        <h2 class="text-center">Frequently Asked Questions</h2>
+        <div class="accordion-item mt-3">
+            <h2 class="accordion-header" id="faqOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    How does the symptom checker work?
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="faqOne" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Simply enter your symptoms and any other relevant health information. Our system will analyze the data and provide you with an initial diagnosis and advice on next steps.
+                </div>
+            </div>
         </div>
-
-        <div class="chat-input-group">
-            <label for="height">Height (optional):</label>
-            <input type="text" id="height" name="height" class="form-control" placeholder="e.g., 5'9&quot;" />
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faqTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Can I trust the diagnosis provided?
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="faqTwo" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    While our system provides accurate initial assessments, we always recommend following up with a healthcare professional for a confirmed diagnosis, especially if the symptoms persist or worsen.
+                </div>
+            </div>
         </div>
-        <div class="chat-info">
-            <a asp-page="/HealthCheckLocations" class="info-link">
-                <i class="fas fa-info-circle"></i> Find free health check locations near you
-            </a>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faqThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    How much does it cost to get a second opinion?
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="faqThree" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    The cost of a second opinion varies depending on the doctor’s expertise and location. You will see the prices before confirming your request.
+                </div>
+            </div>
         </div>
-
-        <button type="submit" class="btn btn-primary chat-submit">Get Diagnosis</button>
-    </form>
-
-
-
-    @if (Model.Diagnosis != null)
-    {
-        <div class="chat-response">
-            <h3>Your Diagnosis</h3>
-            <p>@Model.Diagnosis</p>
-
-            <a asp-page="/SecondOpinionBooking" class="btn btn-secondary chat-second-opinion">Request Second Opinion</a>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="faqFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    How is my personal information protected?
+                </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="faqFour" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    We take your privacy seriously. All your data is encrypted at rest and in transit, and we adhere to strict HIPAA regulations to ensure your information is secure.
+                </div>
+            </div>
         </div>
-    }
+    </div>
+
+    <!-- Footer Section with Registration and Login Links -->
+    <div class="text-center my-5">
+        <a class="btn btn-primary btn-lg" asp-area="Identity" asp-page="/Account/Register" role="button">Register Now</a>
+        <a class="btn btn-secondary btn-lg" asp-area="Identity" asp-page="/Account/Login" role="button">Login</a>
+    </div>
 </div>
