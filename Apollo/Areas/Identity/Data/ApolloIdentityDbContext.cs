@@ -12,6 +12,7 @@ public class ApolloIdentityDbContext : IdentityDbContext<ApplicationUser>
     }
 
     public DbSet<ConsultationHistory> ConsultationHistories { get; set; }
+    public DbSet<ConsultationImage> ConsultationImages { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

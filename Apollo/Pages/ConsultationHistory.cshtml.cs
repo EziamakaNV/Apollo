@@ -25,6 +25,7 @@ namespace Apollo.Pages
             var userId = _userManager.GetUserId(User);
             History = await _dbContext.ConsultationHistories
                 .Where(c => c.UserId == userId)
+                .Include(c => c.Images)
                 .OrderByDescending(c => c.ConsultationDate)
                 .ToListAsync();
         }

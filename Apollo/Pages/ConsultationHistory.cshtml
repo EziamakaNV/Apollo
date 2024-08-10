@@ -12,23 +12,37 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Symptoms</th>
-                <th>Diagnosis</th>
-                <th>Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.History)
-            {
-                <tr>
-                    <td>@item.Symptoms</td>
-                    <td>@item.Diagnosis</td>
-                    <td>@item.ConsultationDate.ToString("g")</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="list-group">
+        @foreach (var item in Model.History)
+        {
+            <div class="list-group-item flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">@item.Symptoms</h5>
+                    <small class="text-muted">@item.ConsultationDate.ToString("g")</small>
+                </div>
+                <p class="mb-1">@item.Diagnosis</p>
+
+                @if (item.Images != null && item.Images.Count > 0)
+                {
+                    <div class="row">
+                        @foreach (var image in item.Images)
+                        {
+                            <div class="col-md-4">
+                                <img src="data:image/jpeg;base64,@image.ImageData" class="img-fluid" alt="Consultation Image">
+                            </div>
+                        }
+                    </div>
+                }
+
+                @if (item.RequestedSecondOpinion)
+                {
+                    <small class="text-success">Second opinion requested</small>
+                }
+                else
+                {
+                    <small class="text-muted">No second opinion requested</small>
+                }
+            </div>
+        }
+    </div>
 }
