@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34526.213
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apollo", "Apollo\Apollo.csproj", "{CED8E82F-341F-406E-803A-9401235FECEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apollo", "Apollo\Apollo.csproj", "{CED8E82F-341F-406E-803A-9401235FECEC}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{5B2D2A80-2242-42C2-9ABC-FF429BC2A3EA}"
 EndProject

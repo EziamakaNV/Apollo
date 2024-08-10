@@ -11,6 +11,8 @@ public class ApolloIdentityDbContext : IdentityDbContext<ApplicationUser>
     {
     }
 
+    public DbSet<ConsultationHistory> ConsultationHistories { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

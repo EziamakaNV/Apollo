@@ -1,0 +1,40 @@
+﻿@page
+@model Apollo.Pages.MedicalKnowledgeBaseModel
+@{
+    ViewData["Title"] = "Medical Knowledge Base";
+}
+
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to the Medical Knowledge Base</h1>
+    <p class="lead">
+        This is your personal medical encyclopedia powered by cutting-edge AI technology. Ask anything about general medical knowledge, and get expert-level insights instantly.
+    </p>
+    <hr class="my-4">
+    <p>
+        Whether you're curious about what makes one more susceptible to Alzheimer's as they age, how to reduce blood pressure naturally, or what exactly athlete's foot is, this is the place to find answers.
+    </p>
+</div>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h5 class="card-title">Ask Your Question</h5>
+        <p class="card-text">Type your question below and get detailed information:</p>
+        <form method="post">
+            <div class="form-group">
+                <label for="query">You are an expert in medical knowledge. Provide detailed information on the following medical condition or topic:</label>
+                <textarea id="query" name="query" rows="4" class="form-control" placeholder="e.g., How can I reduce my blood pressure?"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        </form>
+    </div>
+</div>
+
+@if (Model.Response != null)
+{
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Response</h5>
+            <p class="card-text">@Model.Response</p>
+        </div>
+    </div>
+}

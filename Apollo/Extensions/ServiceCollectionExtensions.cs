@@ -14,10 +14,11 @@ namespace Apollo.Extensions
             services.AddTransient(serviceProvider =>
             {
                 var configuration = serviceProvider.GetService<IConfiguration>()!;
+                var dbContext = serviceProvider.GetService<ApolloIdentityDbContext>();
                 var googleGeminiSettings = configuration.GetSection(nameof(GoogleGeminiSettings))
                  .Get<GoogleGeminiSettings>() ?? throw new MissingFieldException(nameof(GoogleGeminiSettings));
 
-                var geminiService = new GeminiService(googleGeminiSettings.ApiKey);
+                var geminiService = new GeminiService(googleGeminiSettings.ApiKey, dbContext);
 
                 return geminiService;
             });

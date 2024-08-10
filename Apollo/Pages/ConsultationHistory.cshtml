@@ -1,0 +1,34 @@
+﻿@page
+@model Apollo.Pages.ConsultationHistoryModel
+@{
+    ViewData["Title"] = "Consultation History";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (Model.History.Count == 0)
+{
+    <p>You have no consultation history.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Symptoms</th>
+                <th>Diagnosis</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.History)
+            {
+                <tr>
+                    <td>@item.Symptoms</td>
+                    <td>@item.Diagnosis</td>
+                    <td>@item.ConsultationDate.ToString("g")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
