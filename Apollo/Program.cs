@@ -3,7 +3,13 @@ using Apollo.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages(options =>
+{
+    options.Conventions.AuthorizeFolder("/"); // Protect all pages by default
+    options.Conventions.AllowAnonymousToAreaPage("Identity", "/Account/Login"); // Allow anonymous access to the Login page
+    options.Conventions.AllowAnonymousToAreaPage("Identity", "/Account/Register"); // Allow anonymous access to the Register page
+    options.Conventions.AllowAnonymousToAreaPage("Identity", "/Account/Logout"); // Allow anonymous access to the Logout page
+});
 
 builder.Services.AddGeminiService();
 builder.Services.AddData(builder.Configuration);
