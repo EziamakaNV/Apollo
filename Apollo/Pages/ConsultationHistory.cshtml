@@ -36,11 +36,27 @@ else
 
                 @if (item.RequestedSecondOpinion)
                 {
-                    <small class="text-success">Second opinion requested</small>
+                    @if (!string.IsNullOrEmpty(item.SecondOpinion))
+                    {
+                        <div class="mt-3">
+                            <h6>Second Opinion:</h6>
+                            <p>@item.SecondOpinion</p>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="mt-3">
+                            <h6>Second Opinion:</h6>
+                            <p><em>Processing... Please check back later.</em></p>
+                        </div>
+                    }
                 }
                 else
                 {
-                    <small class="text-muted">No second opinion requested</small>
+                    <div class="mt-3">
+                        <small class="text-muted">No second opinion requested</small>
+                        <a asp-page="/SecondOpinionBooking" asp-route-consultationHistoryId="@item.Id" class="btn btn-sm btn-primary ml-2">Request Second Opinion</a>
+                    </div>
                 }
             </div>
         }

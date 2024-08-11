@@ -1,6 +1,7 @@
 ﻿using Apollo.Areas.Identity.Data;
 using GenerativeAI.Models;
 using GenerativeAI.Types;
+using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Apollo.Services
@@ -10,6 +11,7 @@ namespace Apollo.Services
         private GenerativeModel _model;
         private Gemini15Flash _visionModel;
         private ApolloIdentityDbContext _dbContext;
+        private IServiceProvider _serviceProvider;
 
         public GeminiService(string apiKey, ApolloIdentityDbContext dbContext)
         {
@@ -65,7 +67,7 @@ namespace Apollo.Services
             return response;
         }
 
-        public async Task SaveConsultationHistoryAsync(string userId, string symptoms,
+        public async Task<int> SaveConsultationHistoryAsync(string userId, string symptoms,
             string diagnosis, IFormFile image)
         {
             var consultation = new ConsultationHistory
@@ -97,6 +99,26 @@ namespace Apollo.Services
 
             _dbContext.ConsultationHistories.Add(consultation);
             await _dbContext.SaveChangesAsync();
+
+            return consultation.Id;
+        }
+
+        public async Task<string?> SimulateDoctorReplyAsync(ConsultationHistory consultation)
+        {
+            var secondOpinion = await GenerateSecondOpinionAsync(consultation.Symptoms);
+
+            return secondOpinion;
+        }
+
+        private async Task<string?> GenerateSecondOpinionAsync(string symptoms)
+        {
+            // You can customize the prompt or query based on the doctor's specialty or other factors
+            var prompt = $"Provide a second opinion for the following symptoms: {symptoms}";
+
+            // Simulate a call to Gemini API
+            var result = await _model.GenerateContentAsync(prompt);
+
+            return result;
         }
 
         public async Task<string> GetMedicalInformationAsync(string query)

@@ -61,7 +61,7 @@
             <h3>Your Diagnosis</h3>
             <p>@Model.Diagnosis</p>
 
-            <a asp-page="/SecondOpinionBooking" class="btn btn-secondary chat-second-opinion">Request Second Opinion</a>
+            <a asp-page="/SecondOpinionBooking" asp-route-consultationHistoryId="@ViewData["ConsultationHistoryId"]" class="btn btn-secondary chat-second-opinion">Request Second Opinion</a>
         </div>
     }
 </div>
