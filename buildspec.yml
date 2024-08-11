@@ -2,14 +2,11 @@
 version: 0.2
     
 env:
-   variables:
-     PROJECT: Apollo
-     DOTNET_CORE_RUNTIME: 8.0
 
 phases:   
   install:
-    commands:
-      - curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel LTS
+    runtime-versions:
+      dotnet: 8.0
       
   pre_build:
     commands:
@@ -24,7 +21,7 @@ phases:
   post_build:
     commands:
       - echo Publish started on `date`
-      - dotnet publish -c Release -r linux-x64 -o ./build_output ./src/${PROJECT}/${PROJECT}.csproj --self-contained true
+      - dotnet publish -c Release -r linux-x64 -o ./build_output ./src/${PROJECT}/${PROJECT}.csproj
       - cp Procfile ./build_output
 
 artifacts:
