@@ -95,3 +95,13 @@ The application is organized as follows:
 - **Apollo/Shared**: Shared views and layout files.
 - **Dockerfile**: The Dockerfile used to build the application container.
 - **docker-compose.yml**: The Docker Compose configuration file.
+
+## Future Work
+
+As we continue to enhance Apollo, several key features and improvements are planned:
+
+1. **Models Trained Specifically for Symptoms or Diagnosis**: Develop models specifically trained to diagnose symptoms using both text and images for more accurate and reliable results.
+2. **Partnership with More Free Health Clinics**: Expand partnerships with free health clinics and integrate location services to help users find nearby clinics for in-person visits.
+3. **Extensive Booking and Telehealth Services**: Build a comprehensive telehealth platform with advanced booking features, enabling users to schedule and attend virtual appointments with healthcare providers.
+4. **Implement Mailer**: Integrate email notifications for second opinions. Currently, email sending via AWS SES is pending approval. This feature will notify users of second opinions and other important updates.
+5. **Doctor Portal**: Develop a dedicated portal for doctors to manage and view bookings for second opinions, improving communication and service delivery.
