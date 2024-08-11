@@ -9,7 +9,11 @@
 <p>You're about to request a second opinion from @Model.Doctor.Name for a price of $@Model.Doctor.Price.</p>
 
 <form id="opinionForm" method="post" onsubmit="showLoader()">
+    <input type="hidden" name="consultationHistoryId" value="@Model.ConsultationHistoryId" />
+    <input type="hidden" name="doctorId" value="@Model.DoctorId" />
+
     <button type="submit" class="btn btn-success">Confirm and Pay</button>
+    <a asp-page="/ConsultationHistory" class="btn btn-secondary">Cancel</a>
 </form>
 
 <div id="spinner" class="spinner-border text-primary" role="status" style="display: none;">

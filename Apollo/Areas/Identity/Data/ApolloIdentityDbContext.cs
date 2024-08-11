@@ -14,11 +14,19 @@ public class ApolloIdentityDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<ConsultationHistory> ConsultationHistories { get; set; }
     public DbSet<ConsultationImage> ConsultationImages { get; set; }
 
+    public DbSet<Doctor> Doctors { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        // Customize the ASP.NET Identity model and override the defaults if needed.
-        // For example, you can rename the ASP.NET Identity table names and more.
-        // Add your customizations after calling base.OnModelCreating(builder);
+
+        // Seed doctor data
+        builder.Entity<Doctor>().HasData(
+            new Doctor { Id = 1, Name = "Dr. John Smith", Rating = 4.8, Price = 100 },
+            new Doctor { Id = 2, Name = "Dr. Emily Johnson", Rating = 4.7, Price = 120 },
+            new Doctor { Id = 3, Name = "Dr. Michael Brown",  Rating = 4.9, Price = 150 },
+            new Doctor { Id = 4, Name = "Dr. Linda Davis", Rating = 4.6, Price = 80 },
+            new Doctor { Id = 5, Name = "Dr. Robert Wilson", Rating = 4.5, Price = 110 }
+        );
     }
 }

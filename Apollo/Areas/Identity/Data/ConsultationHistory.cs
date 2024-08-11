@@ -12,11 +12,14 @@ namespace Apollo.Areas.Identity.Data
         public DateTimeOffset ConsultationDate { get; set; }
 
         public string? SecondOpinion { get; set; }
-        public string? DoctorName { get; set; }
+        [ForeignKey(nameof(Doctor))]
+        public int? DoctorId { get; set; }
+        
         public bool RequestedSecondOpinion { get; set; } = false;
 
         // Navigation properties
         public ApplicationUser User { get; set; }
         public List<ConsultationImage> Images { get; set; } // Related images
+        public Doctor? Doctor { get; set; }
     }
 }

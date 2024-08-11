@@ -53,8 +53,10 @@ namespace Apollo.Pages
 
             // Save consultation history
             var userId = _userManager.GetUserId(User);
-            await _geminiService.SaveConsultationHistoryAsync(userId, query,
+            var consultationHistoryId = await _geminiService.SaveConsultationHistoryAsync(userId, query,
                 Diagnosis, Image);
+
+            ViewData["ConsultationHistoryId"] = consultationHistoryId;
 
             return Page();
         }

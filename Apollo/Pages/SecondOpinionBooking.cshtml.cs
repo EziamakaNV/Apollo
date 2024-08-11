@@ -1,8 +1,10 @@
 using Apollo.Areas.Identity.Data;
+using Apollo.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System.Numerics;
 
 namespace Apollo.Pages
@@ -11,30 +13,35 @@ namespace Apollo.Pages
     public class SecondOpinionBookingModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApolloIdentityDbContext _dbContext;
+        private readonly GeminiService _geminiService;
 
-        public SecondOpinionBookingModel(UserManager<ApplicationUser> userManager)
+        public SecondOpinionBookingModel(UserManager<ApplicationUser> userManager, ApolloIdentityDbContext dbContext,
+            GeminiService geminiService)
         {
             _userManager = userManager;
+            _dbContext = dbContext;
+            _geminiService = geminiService;
         }
 
         public List<Doctor> Doctors { get; private set; }
 
-        public void OnGet()
+        [BindProperty(SupportsGet = true)]
+        public int ConsultationHistoryId { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(int consultationHistoryId)
         {
-            // Mock data for doctors
-            Doctors = new List<Doctor>
-            {
-            new Doctor { Id = 1, Name = "Dr. Alice Johnson", Rating = 4.8, Price = 50 },
-            new Doctor { Id = 2, Name = "Dr. Michael Smith", Rating = 4.6, Price = 45 },
-            new Doctor { Id = 3, Name = "Dr. Emily Davis", Rating = 4.9, Price = 55 }
-            };
+            ConsultationHistoryId = consultationHistoryId;
+
+            Doctors = await _dbContext.Doctors
+                .ToListAsync();
+
+            return Page();
         }
-        public class Doctor
+
+        public async Task<IActionResult> OnPostAsync(int doctorId)
         {
-            public int Id { get; set; }
-            public string Name { get; set; }
-            public double Rating { get; set; }
-            public double Price { get; set; }
+            return RedirectToPage("/SecondOpinionConfirmation", new { consultationHistoryId = ConsultationHistoryId, doctorId });
         }
 
     }
