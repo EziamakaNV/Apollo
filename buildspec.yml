@@ -14,7 +14,7 @@ phases:
   pre_build:
     commands:
       - echo Restore started on `date`
-      - dotnet restore ./src/${PROJECT}/${PROJECT}.csproj # Restore only the Apollo project
+      - dotnet restore ./src/${PROJECT}/${PROJECT}.csproj # Restore only the Apollo projec
       
   build:
     commands:
