@@ -34,7 +34,7 @@ artifacts:
   discard-paths: no
 
 reports:
-  PrismAPI:
+  Apollo:
     file-format: VisualStudioTrx
     files:
       - '**/*'
