@@ -1,0 +1,262 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.card-deck .card {
+    margin-bottom: 1.5rem;
+}
+
+.card-title {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.card-text {
+    margin-bottom: 1rem;
+}
+
+.jumbotron {
+    background-color: #f8f9fa;
+    padding: 2rem 1rem;
+    border-radius: 0.3rem;
+}
+
+.card {
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.card-title {
+    color: #007bff;
+    font-weight: bold;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.accordion-button {
+    font-weight: bold;
+}
+
+.diagnosis-content h1, .diagnosis-content h2, .diagnosis-content h3 {
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+.diagnosis-content p {
+    margin-bottom: 1em;
+}
+
+.diagnosis-content ul {
+    margin-left: 20px;
+    list-style-type: disc;
+}
+
+.diagnosis-content ol {
+    margin-left: 20px;
+    list-style-type: decimal;
+}
+
+.diagnosis-content code {
+    background-color: #f8f9fa;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: "Courier New", Courier, monospace;
+}
+
+.diagnosis-content pre {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.diagnosis-content h1, .diagnosis-content h2, .diagnosis-content h3,
+.second-opinion-content h1, .second-opinion-content h2, .second-opinion-content h3 {
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+.diagnosis-content p, .second-opinion-content p {
+    margin-bottom: 1em;
+}
+
+.diagnosis-content ul, .second-opinion-content ul {
+    margin-left: 20px;
+    list-style-type: disc;
+}
+
+.diagnosis-content ol, .second-opinion-content ol {
+    margin-left: 20px;
+    list-style-type: decimal;
+}
+
+.diagnosis-content code, .second-opinion-content code {
+    background-color: #f8f9fa;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: "Courier New", Courier, monospace;
+}
+
+.diagnosis-content pre, .second-opinion-content pre {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.medical-content h1, .medical-content h2, .medical-content h3 {
+    font-weight: bold;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+.medical-content p {
+    margin-bottom: 1em;
+}
+
+.medical-content ul {
+    margin-left: 20px;
+    list-style-type: disc;
+}
+
+.medical-content ol {
+    margin-left: 20px;
+    list-style-type: decimal;
+}
+
+.medical-content code {
+    background-color: #f8f9fa;
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-family: "Courier New", Courier, monospace;
+}
+
+.medical-content pre {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.chat-container {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-title {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.chat-subtitle {
+    font-size: 1.1em;
+    color: #555;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.chat-input-group {
+    margin-bottom: 15px;
+}
+
+    .chat-input-group label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .chat-input-group input,
+    .chat-input-group textarea {
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+        .chat-input-group input:focus,
+        .chat-input-group textarea:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            outline: none;
+        }
+
+.chat-info {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.chat-submit {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+}
+
+    .chat-submit:hover {
+        background-color: #0056b3;
+    }
+
+.spinner-border {
+    margin-top: 20px;
+}
+
+.chat-response {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.diagnosis-content h3 {
+    color: #28a745;
+}
+
+.diagnosis-content p {
+    font-size: 1.1em;
+    color: #333;
+}
+
+.chat-second-opinion {
+    margin-top: 15px;
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.chat-second-opinion:hover {
+        background-color: #5a6268;
+    }

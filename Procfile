@@ -1,0 +1,1 @@
+web: dotnet Apollo.dll

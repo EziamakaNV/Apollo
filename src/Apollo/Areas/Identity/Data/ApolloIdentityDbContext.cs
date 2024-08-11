@@ -22,11 +22,11 @@ public class ApolloIdentityDbContext : IdentityDbContext<ApplicationUser>
 
         // Seed doctor data
         builder.Entity<Doctor>().HasData(
-            new Doctor { Id = 1, Name = "Dr. John Smith", Rating = 4.8, Price = 100 },
-            new Doctor { Id = 2, Name = "Dr. Emily Johnson", Rating = 4.7, Price = 120 },
-            new Doctor { Id = 3, Name = "Dr. Michael Brown",  Rating = 4.9, Price = 150 },
-            new Doctor { Id = 4, Name = "Dr. Linda Davis", Rating = 4.6, Price = 80 },
-            new Doctor { Id = 5, Name = "Dr. Robert Wilson", Rating = 4.5, Price = 110 }
+            new Doctor { Id = 1, Name = "Dr. John Smith", Rating = 4.8, Price = 25 },
+            new Doctor { Id = 2, Name = "Dr. Emily Johnson", Rating = 4.7, Price = 30 },
+            new Doctor { Id = 3, Name = "Dr. Michael Brown",  Rating = 4.9, Price = 23 },
+            new Doctor { Id = 4, Name = "Dr. Linda Davis", Rating = 4.6, Price = 40 },
+            new Doctor { Id = 5, Name = "Dr. Robert Wilson", Rating = 4.5, Price = 36 }
         );
     }
 }

@@ -2,7 +2,6 @@
 using GenerativeAI.Models;
 using GenerativeAI.Types;
 using Microsoft.EntityFrameworkCore;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Apollo.Services
 {
@@ -11,7 +10,6 @@ namespace Apollo.Services
         private GenerativeModel _model;
         private Gemini15Flash _visionModel;
         private ApolloIdentityDbContext _dbContext;
-        private IServiceProvider _serviceProvider;
 
         public GeminiService(string apiKey, ApolloIdentityDbContext dbContext)
         {
@@ -20,7 +18,7 @@ namespace Apollo.Services
             _dbContext = dbContext;
         }
 
-        public async Task<string?> GetDiagnosisAsync(string symptoms, IFormFile image)
+        public async Task<string?> GetDiagnosisAsMarkdownAsync(string symptoms, IFormFile image)
         {
             string? response = string.Empty;
 
@@ -130,19 +128,22 @@ namespace Apollo.Services
         }
 
         private string GenerateSymptomCheckerPromptWithoutImage(string message) => $"""
-            You are well-versed in medical symptoms. Provide possible diagnoses, remedies, and advice on whether an ER visit is necessary.
-            Here are the user's symptoms: {message}
+            I know you're not a medical professional, but based on your vast knowledge base, provide possible diagnoses, remedies, and advice on whether an ER visit is necessary.
+            Here are the user's symptoms: {message}.
+            Provide your response in Markdown format.
             """;
 
         private string GenerateSymptomCheckerPromptWithImage(string message) => $"""
-            You are well-versed in medical symptoms. Using all data provided by the user,
-            proffer possible diagnoses, remedies, and advice on whether an ER visit is necessary.
+            I know you're not a medical professional, but based on your vast knowledge base, and using all data provided by the user,
+            provide possible diagnoses, remedies, and advice on whether an ER visit is necessary.
             The user has provided an image.
-            Here are the user's symptoms: {message}
+            Here are the user's symptoms: {message}.
+            Provide your response in Markdown format.
             """;
 
         private string GenerateMedicalKnowledgePrompt(string query) => $"""
-            You are an expert in medical knowledge. Provide detailed information on the following medical condition or topic: {query}
+            You are an expert in medical knowledge. Provide detailed information on the following medical condition or topic: {query}.
+            Provide your response in Markdown format.
             """;
     }
 }
