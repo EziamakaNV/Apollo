@@ -3,6 +3,7 @@ using System;
 using Apollo.Areas.Identity.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Apollo.Migrations
 {
     [DbContext(typeof(ApolloIdentityDbContext))]
-    partial class ApolloIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240811115654_UpdateDoctorPrices")]
+    partial class UpdateDoctorPrices
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -176,35 +179,35 @@ namespace Apollo.Migrations
                         {
                             Id = 1,
                             Name = "Dr. John Smith",
-                            Price = 100.0,
+                            Price = 25.0,
                             Rating = 4.7999999999999998
                         },
                         new
                         {
                             Id = 2,
                             Name = "Dr. Emily Johnson",
-                            Price = 120.0,
+                            Price = 30.0,
                             Rating = 4.7000000000000002
                         },
                         new
                         {
                             Id = 3,
                             Name = "Dr. Michael Brown",
-                            Price = 150.0,
+                            Price = 23.0,
                             Rating = 4.9000000000000004
                         },
                         new
                         {
                             Id = 4,
                             Name = "Dr. Linda Davis",
-                            Price = 80.0,
+                            Price = 40.0,
                             Rating = 4.5999999999999996
                         },
                         new
                         {
                             Id = 5,
                             Name = "Dr. Robert Wilson",
-                            Price = 110.0,
+                            Price = 36.0,
                             Rating = 4.5
                         });
                 });

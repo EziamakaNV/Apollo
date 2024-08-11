@@ -12,7 +12,7 @@
         Enter your symptoms below, optionally upload an image, and get feedback on possible diagnoses, remedies, and advice on whether an ER visit is necessary.
     </p>
 
-    <form id="symptomForm" method="post" enctype="multipart/form-data" class="chat-form" onsubmit="return compressAndSubmit()">
+    <form id="symptomForm" method="post" enctype="multipart/form-data" class="chat-form" onsubmit="compressAndSubmit()">
         <div class="chat-input-group">
             <label for="symptoms">Describe your symptoms:</label>
             <textarea id="symptoms" name="symptoms" rows="4" class="form-control" placeholder="e.g., I've been experiencing a persistent cough..."></textarea>
@@ -42,6 +42,7 @@
             <label for="height">Height (optional):</label>
             <input type="text" id="height" name="height" class="form-control" placeholder="e.g., 5'9&quot;" />
         </div>
+
         <div class="chat-info">
             <a asp-page="/HealthCheckLocations" class="info-link">
                 <i class="fas fa-info-circle"></i> Find free health check locations near you
@@ -59,7 +60,9 @@
     {
         <div class="chat-response">
             <h3>Your Diagnosis</h3>
-            <p>@Model.Diagnosis</p>
+            <div class="diagnosis-content">
+                @Html.Raw(Model.Diagnosis)
+            </div>
 
             <a asp-page="/SecondOpinionBooking" asp-route-consultationHistoryId="@ViewData["ConsultationHistoryId"]" class="btn btn-secondary chat-second-opinion">Request Second Opinion</a>
         </div>
@@ -76,12 +79,10 @@
             const form = document.getElementById('symptomForm');
 
             if (imageInput.files && imageInput.files[0]) {
-                console.log("compression starting...")
                 new Compressor(imageInput.files[0], {
                     quality: 0.6,
                     maxWidth: 1024,
                     success(result) {
-
                         const file = new File([result], result.name, {
                             type: result.type,
                             lastModified: Date.now(),
@@ -92,6 +93,7 @@
                         imageInput.files = dataTransfer.files;
 
                         spinner.style.display = 'block';
+                        form.style.display = 'none'; // Hide the form
                         form.submit();
                     },
                     error(err) {
@@ -103,6 +105,7 @@
             } else {
                 // No image provided, just submit the form
                 spinner.style.display = 'block';
+                form.style.display = 'none'; // Hide the form
                 return true;
             }
         }

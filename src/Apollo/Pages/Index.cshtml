@@ -11,8 +11,11 @@
         <p class="lead">
             Skip the costly ER visits. Get quick and reliable health assessments, personalized advice, and expert opinions from the comfort of your home.
         </p>
-        <a class="btn btn-primary btn-lg" asp-area="Identity" asp-page="/Account/Register" role="button">Get Started</a>
-        <a class="btn btn-secondary btn-lg" asp-area="Identity" asp-page="/Account/Login" role="button">Already Registered? Login</a>
+        @if (!Model.IsUserSignedIn)
+        {
+            <a class="btn btn-primary btn-lg" asp-area="Identity" asp-page="/Account/Register" role="button">Get Started</a>
+            <a class="btn btn-secondary btn-lg" asp-area="Identity" asp-page="/Account/Login" role="button">Already Registered? Login</a>
+        }
     </div>
 
     <!-- How It Works Section -->
@@ -120,8 +123,11 @@
     </div>
 
     <!-- Footer Section with Registration and Login Links -->
-    <div class="text-center my-5">
-        <a class="btn btn-primary btn-lg" asp-area="Identity" asp-page="/Account/Register" role="button">Register Now</a>
-        <a class="btn btn-secondary btn-lg" asp-area="Identity" asp-page="/Account/Login" role="button">Login</a>
-    </div>
+    @if (!Model.IsUserSignedIn)
+    {
+        <div class="text-center my-5">
+            <a class="btn btn-primary btn-lg" asp-area="Identity" asp-page="/Account/Register" role="button">Register Now</a>
+            <a class="btn btn-secondary btn-lg" asp-area="Identity" asp-page="/Account/Login" role="button">Login</a>
+        </div>
+    }
 </div>

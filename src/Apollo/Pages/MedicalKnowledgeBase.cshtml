@@ -4,6 +4,7 @@
     ViewData["Title"] = "Medical Knowledge Base";
 }
 
+
 <div class="jumbotron">
     <h1 class="display-4">Welcome to the Medical Knowledge Base</h1>
     <p class="lead">
@@ -32,12 +33,14 @@
     </div>
 </div>
 
-@if (Model.Response != null)
+@if (!string.IsNullOrEmpty(Model.Response))
 {
     <div class="card">
         <div class="card-body">
             <h5 class="card-title">Response</h5>
-            <p class="card-text">@Model.Response</p>
+            <div class="medical-content">
+                @Html.Raw(Model.Response) <!-- Render the converted HTML content -->
+            </div>
         </div>
     </div>
 }

@@ -1,5 +1,6 @@
 using Apollo.Areas.Identity.Data;
 using Apollo.Services;
+using Markdig;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -33,7 +34,7 @@ namespace Apollo.Pages
             }
 
             // Get medical information from Gemini API
-            Response = await _geminiService.GetMedicalInformationAsync(Query);
+            Response = Markdown.ToHtml(await _geminiService.GetMedicalInformationAsync(Query));
 
             return Page();
         }

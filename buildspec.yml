@@ -1,0 +1,40 @@
+# AWS CodeBuild spec to build an Elastic Beanstalk artifact for AWS CodePipeline to deploy
+version: 0.2
+    
+env:
+   variables:
+     PROJECT: Apollo
+     DOTNET_CORE_RUNTIME: 8.0
+
+phases:   
+  install:
+    commands:
+      - curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel LTS
+      
+  pre_build:
+    commands:
+      - echo Restore started on `date`
+      - dotnet restore ./src/${PROJECT}/${PROJECT}.csproj # Restore only the Apollo project
+      
+  build:
+    commands:
+      - echo Build started on `date`
+      - dotnet build -c Release ./src/${PROJECT}/${PROJECT}.csproj # Build only the Apollo project
+      
+  post_build:
+    commands:
+      - echo Publish started on `date`
+      - dotnet publish -c Release -r linux-x64 -o ./build_output ./src/${PROJECT}/${PROJECT}.csproj --self-contained true
+      - cp Procfile ./build_output
+
+artifacts:
+  files:
+    - '**/*'
+  base-directory: ./build_output
+  discard-paths: no
+
+reports:
+  PrismAPI:
+    file-format: VisualStudioTrx
+    files:
+      - '**/*'

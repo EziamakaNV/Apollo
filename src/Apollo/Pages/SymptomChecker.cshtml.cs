@@ -1,5 +1,6 @@
 using Apollo.Areas.Identity.Data;
 using Apollo.Services;
+using Markdig;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -49,7 +50,10 @@ namespace Apollo.Pages
             var query = $"Symptoms: {Symptoms}\nBlood Pressure: {BloodPressure}\nTemperature: {Temperature}\nWeight: {Weight}\nHeight: {Height}";
 
             // Get diagnosis from Gemini API
-            Diagnosis = await _geminiService.GetDiagnosisAsync(query, Image);
+            var diagnosisAsMarkDown = await _geminiService.GetDiagnosisAsMarkdownAsync(query, Image);
+
+            Diagnosis = Markdown.ToHtml(diagnosisAsMarkDown);
+
 
             // Save consultation history
             var userId = _userManager.GetUserId(User);
