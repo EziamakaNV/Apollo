@@ -19,8 +19,8 @@ builder.Services.AddRazorPages(options =>
 builder.Services.AddGeminiService();
 builder.Services.AddData(builder.Configuration);
 builder.Services.AddIdentity();
-builder.Services.AddDataProtection()
-    .PersistKeysToDbContext<ApolloIdentityDbContext>();
+//builder.Services.AddDataProtection()
+//    .PersistKeysToDbContext<ApolloIdentityDbContext>();
 
 var app = builder.Build();
 
