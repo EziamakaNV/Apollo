@@ -9,10 +9,10 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Apollo/Apollo.csproj", "Apollo/"]
-RUN dotnet restore "./Apollo/Apollo.csproj"
+COPY ["src/Apollo/Apollo.csproj", "src/Apollo/"]
+RUN dotnet restore "./src/Apollo/Apollo.csproj"
 COPY . .
-WORKDIR "/src/Apollo"
+WORKDIR "/src/src/Apollo"
 RUN dotnet build "./Apollo.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

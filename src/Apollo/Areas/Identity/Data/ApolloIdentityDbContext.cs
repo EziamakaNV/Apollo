@@ -1,20 +1,28 @@
+using Apollo.Services;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace Apollo.Areas.Identity.Data;
 
-public class ApolloIdentityDbContext : IdentityDbContext<ApplicationUser>
+public class ApolloIdentityDbContext : IdentityDbContext<ApplicationUser>, IDataProtectionKeyContext
 {
-    public ApolloIdentityDbContext(DbContextOptions<ApolloIdentityDbContext> options)
+    private readonly IDataProtector _protector;
+
+    public ApolloIdentityDbContext(DbContextOptions<ApolloIdentityDbContext> options,
+        IDataProtectionProvider dataProtectionProvider)
         : base(options)
     {
+        _protector = dataProtectionProvider.CreateProtector("PIIProtection");
     }
 
     public DbSet<ConsultationHistory> ConsultationHistories { get; set; }
     public DbSet<ConsultationImage> ConsultationImages { get; set; }
-
     public DbSet<Doctor> Doctors { get; set; }
+    public DbSet<DataProtectionKey> DataProtectionKeys { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -28,5 +36,19 @@ public class ApolloIdentityDbContext : IdentityDbContext<ApplicationUser>
             new Doctor { Id = 4, Name = "Dr. Linda Davis", Rating = 4.6, Price = 40 },
             new Doctor { Id = 5, Name = "Dr. Robert Wilson", Rating = 4.5, Price = 36 }
         );
+
+        var encryptionConverter = new EncryptionConverter(_protector);
+
+        builder.Entity<ConsultationHistory>(entity =>
+        {
+            entity.Property(e => e.Symptoms).HasConversion(encryptionConverter);
+            entity.Property(e => e.Diagnosis).HasConversion(encryptionConverter);
+            entity.Property(e => e.SecondOpinion).HasConversion(encryptionConverter);
+        });
+
+        builder.Entity<ConsultationImage>(entity =>
+        {
+            entity.Property(e => e.ImageData).HasConversion(encryptionConverter);
+        });
     }
 }
